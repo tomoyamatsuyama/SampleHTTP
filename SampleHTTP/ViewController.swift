@@ -30,8 +30,6 @@ struct User: Codable{
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    
     @IBOutlet weak var tableView: UITableView!
     
     var githubLists: [String] = []
@@ -58,23 +56,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "アカウント情報"
+        return "検索結果"
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        print(indexPath.row)
-        let name = self.searchText[indexPath.row]
-        segueToSecondViewController(name: name)
-    }
-    
-    func segueToSecondViewController(name: String) {
-        self.performSegue(withIdentifier: "NextToWeb", sender: name)
+        //セルをクリックした時に呼ばれるメソッド。collectionも似た感じ
+        
+        let name: String = self.searchText[indexPath.row]
+        if name != nil{
+            self.performSegue(withIdentifier: "NextToWeb", sender: name)  //セグエで指定した名前
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let WebViewController = segue.destination as! WebViewController
-        WebViewController.url = sender as! String
+        WebViewController.url = sender as! String  //値を渡す先の変数を指定。
         
     }
     
@@ -110,9 +108,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 guard let imageData = object.profile_image_url else { return }
                 guard let name = object.name else { return }
                 self.userLists.append("ユーザ名: " + name)
-                self.githubLists.append("githubアカウント名: " + githubName)
+                self.githubLists.append("github: " + githubName)
                 self.followLists.append("フォロー数: \(followeesCount)")
-                self.accountLists.append("アカウントid: " + id)
+                self.accountLists.append("id: " + id)
                 DispatchQueue.main.async {
                     self.searchText.append(searchBar.text!)
                 }

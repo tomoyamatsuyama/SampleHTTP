@@ -16,6 +16,7 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var githublabel: UILabel!
     @IBOutlet weak var followlabel: UILabel!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -14,21 +14,10 @@ class WebViewController: UIViewController, UIWebViewDelegate{
     var url: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(url)
-        let initialUrl = NSURL(string: "https://qiita.com/\(url)")
         self.webView.delegate = self
-        let request = NSURLRequest(url: initialUrl! as URL)
+        
+        let accessUrl = NSURL(string: "https://qiita.com/\(url)")
+        let request = NSURLRequest(url: accessUrl! as URL)
         self.webView.loadRequest(request as URLRequest)
     }
-    
-    
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
