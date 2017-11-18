@@ -49,6 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.githublabel.text! = githubLists[indexPath.row]
         cell.namelabel.text! = userLists[indexPath.row]
         cell.idLabel.text! = accountLists[indexPath.row]
+        
         let imgData = imageLists[indexPath.row]
         let img = UIImage(data: imgData as Data)
         cell.imgView.image = img
@@ -64,15 +65,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //セルをクリックした時に呼ばれるメソッド。collectionも似た感じ
         
         let name: String = self.searchText[indexPath.row]
-        if name != nil{
-            self.performSegue(withIdentifier: "NextToWeb", sender: name)  //セグエで指定した名前
-        }
+        self.performSegue(withIdentifier: "NextToWeb", sender: name)  //セグエで指定した名前
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         let WebViewController = segue.destination as! WebViewController
-        WebViewController.url = sender as! String  //値を渡す先の変数を指定。
+        WebViewController.url = sender as! String  //値を渡す先の変数に値をセット。
         
     }
     
